@@ -4,6 +4,13 @@ import { View, Text, Button, StatusBar, StyleSheet, SafeAreaView } from 'react-n
 import InfiniteList from './InfiniteList';
 import { getMarvelCharacters } from  '../../store/actions';
 
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      marginTop: StatusBar.currentHeight || 0,
+    },
+});
+
 const InfiniteListContainer = ({ route, navigation }) => {
     const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
@@ -18,13 +25,6 @@ const InfiniteListContainer = ({ route, navigation }) => {
         dispatch(getMarvelCharacters(onLoadingCompleted));
     },[]);
 
-    const styles = StyleSheet.create({
-        container: {
-          flex: 1,
-          marginTop: StatusBar.currentHeight || 0,
-        },
-    });
-
     const itemClickHandler = (id) => {
         navigation.navigate('Details', {
             itemId: id,
@@ -36,7 +36,6 @@ const InfiniteListContainer = ({ route, navigation }) => {
         setIsLoading(true);
         dispatch(getMarvelCharacters(onLoadingCompleted));
     }
-
 
     return (
         <SafeAreaView style={styles.container}>

@@ -1,7 +1,7 @@
 import {
     GET_MARVEL_CHARACTERS,
     GET_MARVEL_CHARACTERS_SUCCESS
- } from '../actionTyypes'
+ } from '../actionTypes'
 
  const getMarvelCharacters = (onLoadingCompleted) => ({
      type: GET_MARVEL_CHARACTERS,

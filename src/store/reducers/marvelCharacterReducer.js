@@ -1,5 +1,5 @@
 import { act } from 'react-test-renderer';
-import { GET_MARVEL_CHARACTERS_SUCCESS } from '../actionTyypes';
+import { GET_MARVEL_CHARACTERS_SUCCESS } from '../actionTypes';
 
 const marvelCharacterReducer = (state=[], action) => {
     switch(action.type) {

@@ -1,7 +1,7 @@
 import {
     takeLatest, call, put
 } from 'redux-saga/effects';
-import { GET_MARVEL_CHARACTERS } from '../store/actionTyypes';
+import { GET_MARVEL_CHARACTERS } from '../store/actionTypes';
 import { getMarvelCtaracters } from '../network/marvelCharacterService';
 import { getMarvelCharactersSuccess } from '../store/actions';
 

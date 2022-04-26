@@ -48,11 +48,6 @@ const InfiniteList = ({ characters, onItemClicked, handleEndReached, isLoading }
         );
       }, [isLoading]);
 
-    const handleStartReached = ({distanceFromEnd}) =>{
-        // alert('Start reached' + distanceFromEnd);
-    }
-
-
     
     return (
          characters && <FlatList
@@ -65,9 +60,6 @@ const InfiniteList = ({ characters, onItemClicked, handleEndReached, isLoading }
             initialNumToRender={10}
             initialScrollIndex={0}
             onEndReachedThreshold={0.3}
-            onStartReachedThreshold={0.3}
-            // inverted
-            // onStartReached={handleStartReached}
             onEndReached={handleEndReached}
         /> 
     );
