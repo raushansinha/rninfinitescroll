@@ -1,4 +1,4 @@
-# rninfinitescroll
+# Infinite scroll demo with Marvel Characters
 JnJ Demo
 Please run below from root folder
 
