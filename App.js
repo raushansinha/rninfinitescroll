@@ -9,9 +9,10 @@ import header from './src/shared/UIComponents/header';
 import InfiniteListContainer from './src/screens/InfiniteList/InfiniteListContainer';
 import ItemDetail from './src/screens/ItemDetail/ItemDetail';
 import configureStore from './src/store/configureStore';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const Stack = createStackNavigator();
-const store = configureStore({});
+const stores = configureStore({});
 
 function App() {
   return (
@@ -33,7 +34,9 @@ function App() {
 }
 
 export default () => (
-  <Provider store={store}>
-    <App />
+  <Provider store={stores.store}>
+    <PersistGate loading={null} persistor={stores.persistor}>
+      <App />
+    </PersistGate>
   </Provider>
 );
