@@ -2,10 +2,10 @@ import React, { useState, useMemo } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { View, Text, Button, StatusBar, SafeAreaView, FlatList, StyleSheet } from 'react-native';
 import ListItem from './ListItem';
-
+import { adapter } from '../../utils/adapterUtil';
 const styles = StyleSheet.create({
     flatList: {
-        padding: 15,
+        padding: adapter(15),
     }
 });
 
@@ -38,7 +38,7 @@ const InfiniteList = ({ characters, onItemClicked, handleEndReached, isLoading }
         return (
           <View
             style={{
-              margin: 10,
+              margin: adapter(10),
             }}>
             <ActivityIndicator
               color={'red'}

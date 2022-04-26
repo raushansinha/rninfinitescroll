@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { adapter } from '../../utils/adapterUtil';
 
 const styles = StyleSheet.create({
     item: {
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
       alignItems: "flex-start"
     },
     title: {
-      fontSize: 24,
+      fontSize: adapter(24),
     },
 });
 

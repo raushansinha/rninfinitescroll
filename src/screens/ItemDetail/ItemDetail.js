@@ -1,21 +1,19 @@
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet,ScrollView, Button } from 'react-native';
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import OpenURLButton from '../../components/openUrlButton';
+import { adapter, deviceWidth } from '../../utils/adapterUtil';
 
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    alignItems: 'center', 
-    justifyContent: 'center', 
-    padding: 5 },
-    urlsStyle: {
-      flex: 1,
-      flexDirection:"row"
+    container: { 
+      flex: 1, 
+      alignItems: "flex-start", 
+      padding: 5 
     },
     titleStyle: {
-      fontSize: 16,
+      fontSize: adapter(16),
       width: '100%'
     },
     urlsStyle: {
@@ -24,12 +22,27 @@ const styles = StyleSheet.create({
     },
     comicStyle: {
       flex: 3,
+      alignItems: "flex-start",
+      justifyContent: "flex-start",
     },
     seriesStyle: {
       flex: 3,
+      alignItems: "flex-start",
     },
     storiesStyle: {
       flex: 3,
+      alignItems: "flex-start",
+    },
+    headerText: {
+      fontSize: adapter(16), 
+      textAlign: "center",
+      marginTop:5,
+      marginBottom: 5,
+      fontWeight:'bold',
+    },
+    listItem: {
+      padding: 3,
+      fontSize: adapter(12)
     }
 });
 
@@ -44,26 +57,62 @@ const renderUrls = (urls) => {
   });
 };
 
-const renderSmallList = (data) => {
-  
+const itemSeparator = () => {
+  return (
+    <View
+     style={{ height: 1, backgroundColor: "gray", marginHorizontal:10 }}
+    />
+  );
+};
+
+headerText = (headerText) => (
+  <Text style={styles.headerText}>
+    {headerText}
+  </Text>
+);
+
+const renderSmallList = (items) => {
+  return(
+    <ScrollView style={{ flex:1, padding: 5, width: deviceWidth}}>
+        {items.map((item, index) => {
+          const bgColor = index % 2 == 0 ? '#FFCCCB': 'white';
+          return (
+            <View style={{backgroundColor: bgColor}}>
+              <Text style={styles.listItem}>{item.name}</Text>
+              {/* {itemSeparator()} */}
+            </View>
+          );
+        })}
+    </ScrollView>
+  );
 }
 
 const ItemDetail = ({route, navigation}) => {
   const {itemId} = route.params;
   const characterDetails = useSelector(selectCharacterDetails(itemId));
   const { name, comics, series, stories, urls} = characterDetails;
-  navigation.setOptions({title: name})
+  navigation.setOptions({
+    title: name,
+    headerBackTitle: 'Back',
+    headerBackTitleStyle: {
+      fontSize: adapter(10),
+      fontWeight: 'bold'
+    }
+  })
   console.log(characterDetails);
   return (
       <View style={styles.container}>
         <View style={styles.comicStyle}>
-        <Text style={styles.titleStyle}>Comic</Text>
-        </View>
-        <View style={styles.seriesStyle}>
-        <Text style={styles.titleStyle}>Series</Text>
+          {headerText('Comics')}
+          {renderSmallList(comics.items)}
         </View>
         <View style={styles.storiesStyle}>
-        <Text style={styles.titleStyle}>Stories</Text>
+          {headerText('Stories')}
+          {renderSmallList(stories.items)}
+        </View>
+        <View style={styles.seriesStyle}>
+          {headerText('Series')}
+          {renderSmallList(series.items)}
         </View>
         <View style={styles.urlsStyle}>
           {renderUrls(urls)}

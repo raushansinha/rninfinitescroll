@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
-import { Alert, Button, Linking, StyleSheet, View } from "react-native";
+import { View, Alert, Text, TouchableOpacity, Linking, StyleSheet } from "react-native";
+import { adapter } from "../utils/adapterUtil";
 
 const OpenURLButton = ({ url, children }) => {
     const handlePress = useCallback(async () => {
@@ -15,7 +16,19 @@ const OpenURLButton = ({ url, children }) => {
       }
     }, [url]);
   
-    return <Button title={children} onPress={handlePress} />;
+    // return <Button 
+    //         titleStyle={{fontSize : adapter(16)}} 
+    //         title={children} 
+    //         onPress={handlePress}
+    //      />;
+
+    return (
+        <View style={{flex:1, padding: adapter(10)}}>
+            <TouchableOpacity onPress={handlePress}>
+                <Text style={{fontSize: adapter(16), color: 'blue', textDecorationLine: 'underline'}}>{children}</Text>
+            </TouchableOpacity>
+        </View>
+    );
 };
 
 export default OpenURLButton;
